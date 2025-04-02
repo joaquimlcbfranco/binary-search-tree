@@ -275,5 +275,67 @@ function arrayOfNumbers() {
   return array;
 }
 
-const array = arrayOfNumbers();
-console.log(array);
+function driverScript() {
+  // Create an array of 10 random numbers
+  const array = arrayOfNumbers();
+
+  // Create the binary search tree and check if it's balanced
+  const tree = new Tree(array);
+  tree.prettyPrint(tree.root);
+  console.log('Balanced? ', tree.isBalanced());
+
+  // Print out all elements in the tree using the four different traversal methods
+  let levelOrder = '';
+  tree.levelOrder((element) => {
+    levelOrder += `${element.data} `
+  })
+  console.log(levelOrder);
+  let preOrder = '';
+  tree.levelOrder((element) => {
+    preOrder += `${element.data} `
+  })
+  console.log(preOrder);
+  let postOrder = '';
+  tree.postOrder((element) => {
+    postOrder += `${element.data} `
+  })
+  console.log(postOrder);
+  let inOrder = '';
+  tree.inOrder((element) => {
+    inOrder += `${element.data} `
+  })
+  console.log(inOrder);
+
+  // Unbalance the tree by inserting elements bigger than 100, so they access node.right everytime they're added. Check if it's unbalanced
+  tree.insert(106);
+  tree.insert(107);
+  console.log('Balanced? ', tree.isBalanced());
+
+  // Balance the tree by calling rebalance method and check again
+  tree.rebalance();
+  console.log('Balanced? ', tree.isBalanced());
+
+  // Print out all elements again
+  levelOrder = '';
+  tree.levelOrder((element) => {
+    levelOrder += `${element.data} `
+  })
+  console.log(levelOrder);
+  preOrder = '';
+  tree.levelOrder((element) => {
+    preOrder += `${element.data} `
+  })
+  console.log(preOrder);
+  postOrder = '';
+  tree.postOrder((element) => {
+    postOrder += `${element.data} `
+  })
+  console.log(postOrder);
+  inOrder = '';
+  tree.inOrder((element) => {
+    inOrder += `${element.data} `
+  })
+  console.log(inOrder);
+}
+
+driverScript();
