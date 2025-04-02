@@ -228,7 +228,27 @@ class Tree {
   }
 
   rebalance() {
-    
+    const root = this.root;
+    const newArray = []
+    if (root === null) {
+      return;
+    }
+
+    let queue = []
+    queue.push(root);
+    while (queue.length !== 0) {
+      let currNode = queue[0];
+      newArray.push(currNode.data);
+      if (currNode.left !== null) {
+        queue.push(currNode.left);
+      }
+      if (currNode.right !== null) {
+        queue.push(currNode.right);
+      }
+      queue.shift();
+    }
+
+    this.root = this.buildTree(newArray, 0, newArray.length - 1);
   }
 
   prettyPrint (node, prefix = "", isLeft = true) {
@@ -245,11 +265,15 @@ class Tree {
   }
 }
 
-const array = [1, 2, 3]
-const tree = new Tree(array);
-tree.prettyPrint(tree.root)
-setTimeout(() => {
-  tree.insert(4)
-  tree.prettyPrint(tree.root);
-  console.log(tree.isBalanced());
-}, 0)
+function arrayOfNumbers() {
+  let array = [];
+  for (let i = 0; i < 10; i++) {
+    const number = Math.floor(Math.random() * 99);
+    array.push(number)
+  }
+
+  return array;
+}
+
+const array = arrayOfNumbers();
+console.log(array);
